@@ -1,0 +1,18 @@
+{
+    "id": 46,
+    "category": {
+        "id": 6,
+        "name": "Rocky"
+    },
+    "name": "Tucker",
+    "photoUrls": [
+        "https://example.com/photo3.jpg"
+    ],
+    "tags": [
+        {
+            "id": 15,
+            "name": "Bear"
+        }
+    ],
+    "status": "available"
+}

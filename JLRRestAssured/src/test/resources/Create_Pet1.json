@@ -1,0 +1,18 @@
+{
+  "id": 29,
+  "category": {
+    "id": 5,
+    "name": "Jack"
+  },
+  "name": "Cooper",
+  "photoUrls": [
+    "https://example.com/photo1.jpg"
+  ],
+  "tags": [
+    {
+      "id": 8,
+      "name": "Oliver"
+    }
+  ],
+  "status": "pending"
+}

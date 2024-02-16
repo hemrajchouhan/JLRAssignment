@@ -1,0 +1,18 @@
+{
+  "id": 20,
+  "category": {
+    "id": 1,
+    "name": "Buddy"
+  },
+  "name": "Rocky",
+  "photoUrls": [
+    "https://example.com/photo3.jpg"
+  ],
+  "tags": [
+    {
+      "id": 72,
+      "name": "Duke"
+    }
+  ],
+  "status": "sold"
+}
