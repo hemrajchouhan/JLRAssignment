@@ -1,0 +1,189 @@
+{
+	"info": {
+		"_postman_id": "f8f4370f-b3ef-40a9-9444-5d77956ae6ea",
+		"name": "PetStoreAPI_Integration_Suite",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "673967"
+	},
+	"item": [
+		{
+			"name": "PostNewPet",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body has correct data\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(jsonData.id).to.eql(46);\r",
+							"    pm.expect(jsonData.category.id).to.eql(6);\r",
+							"    pm.expect(jsonData.category.name).to.eql(\"Rocky\");\r",
+							"    pm.expect(jsonData.name).to.eql(\"Tucker\");\r",
+							"    pm.expect(jsonData.photoUrls).to.eql([\"https://example.com/photo3.jpg\"]);\r",
+							"    pm.expect(jsonData.tags[0].id).to.eql(15);\r",
+							"    pm.expect(jsonData.tags[0].name).to.eql(\"Bear\");\r",
+							"    pm.expect(jsonData.status).to.eql(\"available\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 46,\r\n  \"category\": {\r\n    \"id\": 6,\r\n    \"name\": \"Rocky\"\r\n  },\r\n  \"name\": \"Tucker\",\r\n  \"photoUrls\": [\r\n    \"https://example.com/photo3.jpg\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 15,\r\n      \"name\": \"Bear\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{PetStorebaseUrl}}/pet/",
+					"host": [
+						"{{PetStorebaseUrl}}"
+					],
+					"path": [
+						"pet",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdatePet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify response body\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.equal(46);\r",
+							"    pm.expect(jsonData.category.id).to.equal(6);\r",
+							"    pm.expect(jsonData.category.name).to.equal(\"Rocky\");\r",
+							"    pm.expect(jsonData.name).to.equal(\"Tucker\");\r",
+							"    pm.expect(jsonData.photoUrls).to.be.an('array').that.includes(\"https://example.com/photo3.jpg\");\r",
+							"    pm.expect(jsonData.tags[0].id).to.equal(15);\r",
+							"    pm.expect(jsonData.tags[0].name).to.equal(\"Bear\");\r",
+							"    pm.expect(jsonData.status).to.equal(\"pending\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 46,\r\n  \"category\": {\r\n    \"id\": 6,\r\n    \"name\": \"Rocky\"\r\n  },\r\n  \"name\": \"Tucker\",\r\n  \"photoUrls\": [\r\n    \"https://example.com/photo3.jpg\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 15,\r\n      \"name\": \"Bear\"\r\n    }\r\n  ],\r\n  \"status\": \"pending\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{PetStorebaseUrl}}/pet",
+					"host": [
+						"{{PetStorebaseUrl}}"
+					],
+					"path": [
+						"pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCreatedPet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							" // Assertion: Status code should be 200 (OK) for successful retrieval\r",
+							"        pm.test(\"Status code is 200\", function () {\r",
+							"            pm.response.to.have.status(200);\r",
+							"        });\r",
+							"\r",
+							"        // Assertion: Verify the retrieved pet's name\r",
+							"        pm.test(\"Pet name is correct\", function () {\r",
+							"            pm.expect(pm.response.json().name).to.eql(\"Tucker\");\r",
+							"        });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{PetStorebaseUrl}}/pet/{{id}}",
+					"host": [
+						"{{PetStorebaseUrl}}"
+					],
+					"path": [
+						"pet",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteCreatedPet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							" pm.test(\"Status code is 200\", function () {\r",
+							"                    pm.response.to.have.status(200);\r",
+							"                });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{PetStorebaseUrl}}/pet/{{id}}",
+					"host": [
+						"{{PetStorebaseUrl}}"
+					],
+					"path": [
+						"pet",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
